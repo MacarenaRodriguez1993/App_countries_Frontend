@@ -1,0 +1,16 @@
+.formSearch{
+    width: 20%;
+    margin: auto;
+    display: initial;
+    background-color: #4F7B8C;
+
+}
+label{
+    font-size: larger;
+    color: #D9B07E;
+}
+input{
+    border-radius: 1em;
+    border: none;
+    background-color: #D9B07E;
+}

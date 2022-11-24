@@ -1,0 +1,96 @@
+
+.page{
+   display: flex; 
+   justify-content: space-around;
+   margin: 1em 0.7em;
+   color: #D9B07E;
+   align-items: center;
+}
+.buttonBack{
+    background-color: rgb(151, 20, 20);
+    padding: 0.2em 0.6em;
+    font-size: larger;
+    margin-top: 2em;
+    color: #D9B07E;
+}
+.countryDetails{
+    width: 40%;
+    height: 40%;
+    border: 2px solid #D9B07E;
+    margin: 2.4em 0;
+    text-align: center;
+    font-size: large;
+    border-radius: 1em;
+}
+.headerDetails,.contentDetails{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 0.5em;
+}
+#code{
+    margin: 0.5em;
+    padding: 0.5em;
+    font-size: medium;
+    border-radius: 100%;
+    background-color: #D9B07E;
+    color: #0F1140;   
+}
+#content{
+    width: 60%;
+}
+h4{
+    font-size: xx-large;
+    margin: 0;
+}
+h5{
+    margin: 0.2em;
+    padding: 0.1em;
+    font-size: larger;
+}
+.flagDetails{
+    width: 20%;
+    height: 20%;
+    border-radius: 1em;
+    margin: auto;
+}
+.activities{
+    width: 60%;
+    border-radius: 1em;
+    text-align: center;
+    display: none;
+}
+#msjNoActiv{
+    display: none;
+    font-size: xx-large;
+}
+.cardActivities{
+    width: 50%;
+    border: 2px solid black;
+    margin: 0.2em;
+    padding: 0;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+}
+.closed{
+    border: 2 solid black;
+    width: 10%;
+    font-size: small;
+    background-color: red;
+    margin: 0;
+    padding: 0;
+}
+.actR{
+    width: 100%;
+    height: 50px;
+}
+#activityDetails{
+    margin-top: 0;
+    border: none;
+}
+#exitActiv{
+    background-color: red;
+    font-size: medium;
+    margin: 0;
+}

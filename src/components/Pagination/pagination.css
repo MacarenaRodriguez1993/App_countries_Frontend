@@ -1,0 +1,13 @@
+.paginator{
+    text-align: center;
+    margin: 10px auto;
+    width: 35%;
+    /* background-color: #0f11407b; */
+    border-radius: 1em;
+    padding: 0.3em;
+    color:#D9B07E
+}
+.pageButton{
+    background-color: #4F7B8C;
+    color:#D9B07E;
+}

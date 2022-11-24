@@ -1,0 +1,60 @@
+.titleNav{
+    margin: 0;
+    padding-top:0.4em;
+    font-size: xx-large;
+    margin-bottom: 0;
+    text-align: center;
+    color:#D9B07E;
+    background-color: #4F7B8C;
+}
+
+form{
+    width: 40%;
+    margin-left: 8em; 
+    margin-top: 1em;
+    border-radius: 1em;
+    display: flex;
+    flex-direction: column;
+    /* backdrop-filter: blur(10px) */
+    background-color: #4f7b8c52; 
+}
+label,input,select,option{
+    font-size: large;
+    margin: 0.3em;
+}
+.buttonBack{
+    background-color: rgb(151, 20, 20);
+    padding: 0.2em 0.6em;
+    font-size: larger;
+    margin-left:7em ;
+    margin-top: 0.5em;
+}
+.button{
+    margin: 1em;
+    text-align: center;
+}
+.buttonSubmit{
+    margin: auto;
+    background-color: #d8a15e;
+}
+.buttonSubmit:disabled{
+    background-color: #d8a15e57;
+    box-shadow: none;
+}
+.buttonClear{
+    background-color: rgb(73, 181, 127);
+}
+.msjError{
+    background-color: rgba(221, 26, 26, 0.616);
+    color: #F2F2F2;
+    text-align: center;
+    font-size: large;
+    width: 100%;
+    border-radius: 1em;
+}
+#createActivities{
+    display: flex;
+}
+.cardC{
+    margin-left: 1em;
+}

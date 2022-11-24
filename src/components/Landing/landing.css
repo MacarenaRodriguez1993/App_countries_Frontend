@@ -1,0 +1,35 @@
+.landing{
+  /* background-image: url('../../assets/estrellas.jpg'); */
+  background-image: url('../../assets/munnegro.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  width: 100%;
+  padding: 0;
+  display: flex;
+  justify-content: space-around; 
+  /* background-color: #22325A; */
+   
+}
+.title{
+    color:#D9B07E;
+    margin-top: 5em;
+    width: 60%;
+    text-align: center;
+    font-size: x-large;
+}  
+button{
+  padding: 0.8em;
+  border: none;
+  border-radius: 10px;
+  background-color:#D9B07E;
+  color: #010002;
+  font-size: x-large;
+  text-align: center;
+}
+button:hover{
+  background-color: #daa86a;
+  color:#010002;
+  box-shadow: 4px 4px #4F7B8C;
+  transition: 0.5s;
+}

@@ -1,0 +1,23 @@
+
+.tableActivities{
+    width: 90%;
+    border: 2px solid #D9B07E;
+    color: #D9B07E;
+    margin:  1em auto;
+    font-size: larger;
+}
+thead{
+    background-color: #4f7b8c7b;
+} 
+th{
+    border: 2px solid #D9B07E;
+    padding: 0.3em;
+}
+#buttonDelete{
+    background-color: rgb(151, 20, 20);
+    color: #D9B07E;
+}
+#buttonUpdate{
+    background-color:#D9B07E;
+    color: black;
+}
