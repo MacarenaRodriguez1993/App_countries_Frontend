@@ -1,4 +1,4 @@
-import axios from "axios";
+//import axios from "axios";
 export const CREATE_ACTIVITY ='CREATE_ACTIVITY';
 export const GET_ACTIVITIES='GET_ACTIVITIES';
 export const FILTER_ACTIVITY='FILTER_ACTIVITY';
@@ -6,8 +6,8 @@ export const DELETE_ACTIVITY='DELETE_ACTIVITY';
 export const UPDATE_ACTIVITY ='UPDATE_ACTIVITY';
 export const ERRORA='ERROR';
 
-//const apiURL = 'https://appcountries-api.up.railway.app';
-const apiURL = 'http://localhost:3001'
+const apiURL = 'https://appcountries-api.up.railway.app';
+//const apiURL = 'http://localhost:3001'
 
 export const createActivity = (activity) =>{
     return async function(dispatch){
