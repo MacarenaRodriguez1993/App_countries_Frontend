@@ -7,8 +7,10 @@ import {
     ORDER_POPULATION,PAGE_NEXT,
     PAGE_BACK,
     CLEAR_DETAILS,
+   
 } from "../actions/countries";
-import {GET_ACTIVITIES,FILTER_ACTIVITY,DELETE_ACTIVITY} from '../actions/activities'
+import {GET_ACTIVITIES,FILTER_ACTIVITY,DELETE_ACTIVITY ,UPDATE_ACTIVITY,
+    ERRORA,} from '../actions/activities'
 
 const initialState ={
     allCountries: [],
@@ -20,7 +22,7 @@ const initialState ={
     orderAlphabetical:'ALL',
     orderPopulation:'ALL',
     page:0,
-
+    errorA:{},
 };
 
 const rootReducer = (state = initialState, action)=>{
@@ -55,25 +57,29 @@ const rootReducer = (state = initialState, action)=>{
                 ...state,
                 activities:[...state.activities,action.payload]
             }
-       
+
         case GET_ACTIVITIES:
             return{
                 ...state,
                 activities:action.payload
             }
-        // case DELETE_ACTIVITY:
-        //     const actFilt=state.countryDetails
-        //     console.log('ola'+actFilt)
-        //     return{
-        //         ...state,
-        //         activities:actFilt
-        //     }
+
         case DELETE_ACTIVITY:
-            console.log('payload'+ action.payload.id)
+            const updateActivities= state.activities.filter((a) => a.id !== action.payload)
             return {
                 ...state,
-                activities: state.activities.filter((a) => a.id !== action.payload.id),
+                activities: updateActivities,
             };
+        case UPDATE_ACTIVITY:
+            return{
+                ...state,
+                activities:[...state.activities,action.payload]
+            }
+        case ERRORA:
+            return{
+                ...state,
+                errorA:action.payload,
+            }
         case FILTER:
             let filterByCountry=action.payload;
             let allCountries = [...state.allCountries]
@@ -171,3 +177,26 @@ const rootReducer = (state = initialState, action)=>{
 }
 
 export default rootReducer;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

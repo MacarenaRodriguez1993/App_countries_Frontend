@@ -1,14 +1,13 @@
 .home{
   /* background-image: url('../../assets/mundo\ 2.jpg'); */
   /* background-image: url('../../assets/mundo_b_n.jpg'); */
-  background-image: url('../../assets/estrellas.jpg'); 
+ 
   /* background-color: #010002;; */
   /* background-size: cover;
   background-position: center;
   height: fit-content;
    */
-   background-size: cover;
-   height: 120vh;
+
 }
 .home_countries{
   display: flex;

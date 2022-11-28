@@ -1,10 +1,13 @@
-//import axios from "axios";
+import axios from "axios";
 export const CREATE_ACTIVITY ='CREATE_ACTIVITY';
 export const GET_ACTIVITIES='GET_ACTIVITIES';
 export const FILTER_ACTIVITY='FILTER_ACTIVITY';
 export const DELETE_ACTIVITY='DELETE_ACTIVITY'; 
+export const UPDATE_ACTIVITY ='UPDATE_ACTIVITY';
+export const ERRORA='ERROR';
 
-const apiURL = 'https://appcountries-api.up.railway.app';
+//const apiURL = 'https://appcountries-api.up.railway.app';
+const apiURL = 'http://localhost:3001'
 
 export const createActivity = (activity) =>{
     return async function(dispatch){
@@ -35,43 +38,58 @@ export const getActivities = ()=>{
             })
     }
 }
-// export const deleteActivity = (id)=>{
-//     return async function(dispatch){
-//         await fetch(`http://localhost:3001/activities/${id}`,{
-//             method:'DELETE',
-//             headers:{
-//                 'Content-type':'application/json',
-//             }
-//         }).then(res=>res.json())
-//         dispatch({
-//             type:DELETE_ACTIVITY,
-//             payload:id
-//         })
-//     }
-// }
-export const deleteActivity = (id) => {
-    return async function (dispatch) {
-      try {
-        //const activity = await axios.delete(`http://localhost:3001/activities/${id}`, id);
-        const activity = await fetch(`${apiURL}/activities/${id}`,{
-                       method:'DELETE',
-                       headers:{
-                           'Content-type':'application/json',
-                       }
-                   }).then(res=>res.json())
-        return dispatch({
-          type: DELETE_ACTIVITY,
-          payload: activity,
-        });
-      } catch (e) {
 
-      }
-    };
-  };
+export const deleteActivity = (id) => {
+  return async function (dispatch) {
+    try {
+    //const activity = await axios.delete(`http://localhost:3001/activities/${id}`, id);
+      await fetch(`${apiURL}/activities/${id}`,{
+        method:'DELETE',
+        headers:{'Content-type':'application/json'}
+        })
+        .then(res=>res.json())
+      dispatch({
+        type: DELETE_ACTIVITY,
+        payload: id,
+      });
+    }catch (e) {
+
+    }
+  } 
+};
+
+export const updateActivity = (act)=>{
+  return async function(dispatch){
+     const request={
+      method: 'PUT',
+      headers:{'Content-type':'application/json'},
+      body:JSON.stringify(act) 
+     }
+     console.log(act.countries)
+    try {
+      const activUpdate=await fetch(`${apiURL}/activities/update`,request).then(resp=>resp.json())
+      // const res = await axios.put(`${apiURL}/activities/update`,act);
+      // console.log('resp')
+      // console.log(res.data)
+      
+      dispatch({
+        type:UPDATE_ACTIVITY,
+        payload:activUpdate,
+      })
+    } catch (err) {
+      dispatch({
+        type:ERRORA,
+        payloade:err
+      })
+    }
+  }
+}
+
+
 export const filterActivity = (payload) => {
-    return {
-      type: FILTER_ACTIVITY,
-      payload,
-    };
+  return {
+    type: FILTER_ACTIVITY,
+    payload,
+  };
 };
 

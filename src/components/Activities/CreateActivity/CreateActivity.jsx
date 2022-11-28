@@ -1,31 +1,37 @@
 import React ,{useState}from "react";
 import { useDispatch, useSelector } from "react-redux";
 import '../CreateActivity/createActivity.css'
-import {createActivity} from '../../../redux/actions/activities';
+import {createActivity, updateActivity} from '../../../redux/actions/activities';
 import {Link} from 'react-router-dom';
 import FormCardCountry from "../../FormCardCountry/FormCardCountry";
 
 
 
-const CreateActivity = ()=>{
+const CreateActivity = (props)=>{
 
     const allCountries = useSelector((state)=>state.allCountries);
     const allActivities=useSelector((state)=> state.activities);
 
+    const activityId=props.match.params.id;
+
+    let activityUpdate= allActivities.find((a )=> a.id === parseInt(activityId)) 
+
     const dispatch = useDispatch();
     const [formActivity,setFormActivity] = useState({
-        name:'',
-        difficult:0,
-        duration:'',
-        season:'',
-        countries:[]
+        name: activityUpdate ? activityUpdate.name : '' ,
+        difficult: activityUpdate ? activityUpdate.difficult : 0,
+        duration: activityUpdate ? activityUpdate.duration : '',
+        season: activityUpdate ? activityUpdate.season :  '',
+        countries: activityUpdate ? activityUpdate.countries: []
     });
 
     const [errors,setErrors]=useState({
         name:''
     })
+
     let nameActivities=allActivities.map(act=>act.name)
    
+
     const validate = (state)=>{
         let err={};
         let existingActivity= nameActivities.find(act=> act ===state.name)
@@ -52,14 +58,25 @@ const CreateActivity = ()=>{
 
     
     const onSubmit = (event) =>{
+       
         event.preventDefault();
-        dispatch(createActivity(formActivity))
-        alert(`Activity "${formActivity.name}" successfully created!`)
-        event.target.reset();
-        setFormActivity({
-            countries:[]
-        });
-        document.getElementById("countries").selectedIndex = 0;
+        if(activityId){
+            formActivity.id=activityId
+            
+            dispatch(updateActivity(formActivity))
+            alert(`Activity "${formActivity.name}" successfully update!`)
+            handlerClear();
+            activityUpdate.countries=[]
+        }else{
+           
+            dispatch(createActivity(formActivity))
+            alert(`Activity "${formActivity.name}" successfully created!`)
+            event.target.reset();
+            setFormActivity({
+                countries:[]
+            });
+            document.getElementById("countries").selectedIndex = 0;
+        } 
     }
     const handlerClear=()=>{
         setFormActivity({
@@ -88,7 +105,7 @@ const CreateActivity = ()=>{
     return(
         <div className="home">
             <h3 className="titleNav">Create Activity for countries</h3>
-            <Link to='/home'><button className="buttonBack"> ← GO HOME</button></Link>
+            <Link to='/home'><button className="buttonBack">← GO HOME</button></Link>
             <div  id='createActivities'>
                 <form id='formActivity' onSubmit={(event)=> onSubmit(event)}>
                     <label>Activity name </label>
@@ -179,28 +196,42 @@ const CreateActivity = ()=>{
                         <button type="submit"className="buttonSubmit" 
                             disabled={!formActivity.name ||!formActivity.difficult || !formActivity.duration|| !formActivity.season
                                 || errors.name || errors.difficult || errors.duration || errors.season} 
-                            >Submit
+                            >Create
                         </button>   
-                        <button type="button" className="buttonClear" onClick={handlerClear}>clear</button>   
+                        <button type="button" className="buttonClear" onClick={handlerClear}>Clear</button>   
                     </div>
                 </form>
 
                 <div className="cardC">
                     {
+                        activityUpdate?.countries.map(c=>{
+                            return(
+                                <FormCardCountry
+                                    key={c.id}
+                                    id={c.id}
+                                    name={c.name}
+                                    image={c.flagImage}
+                                    state={formActivity}
+                                    setState={setFormActivity}
+                                />
+                            )
+                        })
+                    }{
                         allCountries?.filter((country)=> formActivity.countries.includes(country.id))
-                            .map(country=>{
-                                return(
-                                    <FormCardCountry
-                                        key={country.id}
-                                        id={country.id}
-                                        name={country.name}
-                                        image={country.flagImage}
-                                        state={formActivity}
-                                        setState={setFormActivity}
-                                    />
-                                )
-                            })
+                        .map(country=>{
+                            return(
+                                <FormCardCountry
+                                    key={country.id}
+                                    id={country.id}
+                                    name={country.name}
+                                    image={country.flagImage}
+                                    state={formActivity}
+                                    setState={setFormActivity}
+                                />
+                            )
+                        })
                     }
+                       
                 </div>
             </div>
         </div>

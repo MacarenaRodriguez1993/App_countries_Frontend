@@ -4,14 +4,17 @@ import { useDispatch, useSelector } from "react-redux";
 import {Link} from 'react-router-dom';
 import {getActivities,deleteActivity} from '../../../redux/actions/activities';
 
+
 const ShowActivities = () =>{
     const allActivities = useSelector((state)=>state.activities);
     const dispatch = useDispatch();
-
+    
     useEffect(()=>{
         dispatch(getActivities())
-    },[dispatch,allActivities])
-    const onClick = (id)=>{
+    },[dispatch])
+
+
+    const onClickDelete = (id)=>{
         if(window.confirm(`Are you sure to delete n° ${id} activity?`))
         dispatch(deleteActivity(id))
     }
@@ -27,6 +30,7 @@ const ShowActivities = () =>{
                             <th>Difficult</th>
                             <th>Duration (hours)</th>
                             <th>Season</th>
+                            <th>Countries</th>
                             <th>Actions</th>
                         </tr>
                      </thead>
@@ -42,9 +46,15 @@ const ShowActivities = () =>{
                                 <th>{act.difficult}</th>
                                 <th>{act.duration}</th>
                                 <th>{act.season}</th>
+                                <th>{act.countries.map(c=>{
+                                    return (
+                                        <p>{c.id}</p>
+                                    )})}</th>
                                 <th>
-                                    <button id='buttonUpdate'>Edit</button>
-                                    <button id='buttonDelete'onClick={()=>onClick(act.id)}> 🗑️ Delete</button>
+                                    <Link to={`/updateActivity/${act.id}`}>
+                                        <button id='buttonUpdate'>📝Edit</button>
+                                    </Link>
+                                    <button id='buttonDelete'onClick={()=>onClickDelete(act.id)}> 🗑️ Delete</button>
                                 </th>
                             </tr>
                         </tbody>)

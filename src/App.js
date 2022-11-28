@@ -11,10 +11,11 @@ import ShowActivities from './components/Activities/ShowActivities/ShowActivitie
 function App() {
   return (
     <div className='App'>
-      <Route path exact='/'component={Landing}/>
+      <Route exact path='/'component={Landing}/>
       <Route path='/home' component={Home}/>
       <Route path='/countryDatails/:id' component={CountryDetails}/>
       <Route path='/createActivity' component={CreateActivity} />
+      <Route path='/updateActivity/:id' component={CreateActivity} />
       <Route path='/showActivities' component={ShowActivities} />
     </div>
   );
