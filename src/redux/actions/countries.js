@@ -8,8 +8,8 @@ export const  PAGE_NEXT = 'PAGE_NEXT';
 export const PAGE_BACK='PAGE_BACK';
 export const CLEAR_DETAILS = 'CLEAR_DETAILS';
 
-//const apiURL = 'https://appcountries-api.up.railway.app';
-const apiURL = 'http://localhost:3001';
+const apiURL = 'https://appcountries-api.up.railway.app';
+//const apiURL = 'http://localhost:3001';
 export const getAllCountries = ()=>{
     return function(dispatch){
         fetch(`${apiURL}/countries/`)
