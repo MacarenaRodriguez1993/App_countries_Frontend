@@ -4,6 +4,7 @@ export const GET_ACTIVITIES='GET_ACTIVITIES';
 export const FILTER_ACTIVITY='FILTER_ACTIVITY';
 export const DELETE_ACTIVITY='DELETE_ACTIVITY'; 
 export const UPDATE_ACTIVITY ='UPDATE_ACTIVITY';
+export const DELETE_ACTIVITY_OF_COUNTRY='DELETE_ACTIVITY_OF_COUNTRY';
 export const ERRORA='ERROR';
 
 const apiURL = 'https://appcountries-api.up.railway.app';
@@ -53,7 +54,10 @@ export const deleteActivity = (id) => {
         payload: id,
       });
     }catch (e) {
-
+      dispatch({
+        type:ERRORA,
+        payload:e.message,
+      })
     }
   } 
 };
@@ -65,12 +69,9 @@ export const updateActivity = (act)=>{
       headers:{'Content-type':'application/json'},
       body:JSON.stringify(act) 
      }
-     console.log(act.countries)
     try {
       const activUpdate=await fetch(`${apiURL}/activities/update`,request).then(resp=>resp.json())
       // const res = await axios.put(`${apiURL}/activities/update`,act);
-      // console.log('resp')
-      // console.log(res.data)
       
       dispatch({
         type:UPDATE_ACTIVITY,
@@ -92,4 +93,11 @@ export const filterActivity = (payload) => {
     payload,
   };
 };
+
+export const deleteActivityOfCountry = (id)=>{
+  return{
+    type:DELETE_ACTIVITY_OF_COUNTRY,
+    payload:id,
+  }
+}
 

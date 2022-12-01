@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import{useDispatch, useSelector} from 'react-redux';
 import '../countryDetails/countryDetails.css';
 import { getCountryDetails} from '../../redux/actions/countries';
-import {deleteActivity} from '../../redux/actions/activities'
 import { Link } from "react-router-dom";
 
 const CountryDetails = (props)=>{
@@ -20,17 +19,12 @@ const CountryDetails = (props)=>{
             const a = document.getElementById('activities');
             a.style.display='block'
         }
-        
     }
 
     useEffect(()=>{
         dispatch(getCountryDetails(countryId))
-    },[dispatch,countryId,activ]);
+    },[dispatch,countryId,activ,countryDetails.activities]);
 
-    const onClick = (id)=>{
-        alert('Are you sure to delete the walk activity?')
-        dispatch(deleteActivity(id))
-    }
 
     return (
         <div className="home">
@@ -58,7 +52,6 @@ const CountryDetails = (props)=>{
                 </div>
                 <div className="activities" id='activities'>
                     <h4>Activities:</h4>
-                 
                     {
                         <table className="tableActivities" id='activityDetails'>
                             {
@@ -68,7 +61,6 @@ const CountryDetails = (props)=>{
                                     <th>Difficult</th>
                                     <th>Duration (hours)</th>
                                     <th>Season</th>
-                                    <th>Del</th>
                                 </tr>
                                 </thead>
                             }
@@ -84,10 +76,6 @@ const CountryDetails = (props)=>{
                                     <th>{act.difficult}</th>
                                     <th>{act.duration}</th>
                                     <th>{act.season}</th>
-                                    <th>
-                                        <button id='exitActiv' 
-                                            onClick={()=>onClick(act.id)}>x
-                                        </button></th>
                                     </tr>
                                     </tbody>)               
                                 }

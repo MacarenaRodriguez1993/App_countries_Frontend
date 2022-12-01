@@ -17,13 +17,14 @@ import Pagination from "../Pagination/Pagination";
 
 const  Home =()=> {
 
-    const allCountries = useSelector((state)=>state.countries)
+    const allCountries = useSelector((state)=>state.countries);
+    const currentPage = useSelector((state)=>state.page);
     const dispatch=useDispatch();
 
     useEffect(()=>{
         dispatch(getAllCountries());
-        dispatch(getActivities())
-        dispatch(clearDetails())
+        dispatch(getActivities());
+        dispatch(clearDetails());
     },[dispatch])
 
     const openActivities = ()=>{
@@ -32,66 +33,63 @@ const  Home =()=> {
         a.style.position='absolute'
     }
 
-    const currentPage = useSelector((state)=>state.page)
+    //  Paginacion
     const  firstIndex = currentPage*10;
     const lastIndex = firstIndex+10;
-    const countriesForPage=allCountries?.slice(firstIndex,lastIndex)
+    const countriesForPage=allCountries?.slice(firstIndex,lastIndex);
    
-        return( 
-            <div className="home">
-                <div className="navBar">
-                    <div >
-                        <Link className="goBackHome" to='/'>
-                            <h3 className="goBackHome"><b>Henry Countries</b></h3>                       
+    return( 
+        <div className="home">
+            
+            <div className="navBar">
+                <div >
+                    <Link className="goBackHome" to='/'>
+                        <h3 className="goBackHome"><b>Henry Countries</b></h3>                       
+                    </Link>
+                </div>
+                <div>
+                    <Filtros/>
+                </div>    
+            </div>
+                
+            <div className="filter">
+                <FilterByContinent/>
+                <FilterByActivity/>
+                <OrderAlphabetical/>
+                <OrderPopulation/>
+                <div className="activ">
+                    <button className="butActiv" onClick={openActivities}>Activities</button>
+                    <div className="bubble" id='bubble'>
+                        <Link to='/showActivities'>
+                            <button className="createOrShow">Show activities</button>
+                        </Link>
+                        <Link to='/createActivity'>
+                            <button className="createOrShow"> Create Activity</button>
                         </Link>
                     </div>
-                   <div>
-                    <Filtros/>
-                   </div>
-                  
                 </div>
-                
-                <div className="filter">
-                    <FilterByContinent/>
-                    <FilterByActivity/>
-                    <OrderAlphabetical/>
-                    <OrderPopulation/>
-                    <div className="activ">
-                        <button className="butActiv" onClick={openActivities}>Activities</button>
-                        <div className="bubble" id='bubble'>
-                            <Link to='/showActivities'>
-                                <button className="createOrShow">Show activities</button>
-                            </Link>
-                            <Link to='/createActivity'>
-                                <button className="createOrShow"> Create Activity</button>
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-                <div className="home_countries">
-
-                    <div className="countryCard">
-                        
-                        {
-                            countriesForPage?.map((country)=> {
-                                return(
-                                    
-                                    <Country
-                                        key={country.id}
-                                        id={country.id}
-                                        name={country.name}
-                                        image={country.flagImage}
-                                        continent={country.continent}
-                                    />
-                                )                
-                            })
-                        }
-                    </div>
-                </div>
-               
-                <Pagination allCountries={allCountries?.length}/> 
             </div>
-        );
+
+            <div className="home_countries">
+                <div className="countryCard">      
+                {
+                    countriesForPage?.map((country)=> {
+                    return(
+                        <Country
+                            key={country.id}
+                            id={country.id}
+                            name={country.name}
+                            image={country.flagImage}
+                            continent={country.continent}
+                        />
+                    )})
+                }
+                </div>
+            </div>
+               
+            <Pagination allCountries={allCountries?.length}/> 
+        </div>
+    );
   };
   
   export default Home;

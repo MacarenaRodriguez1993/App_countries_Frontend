@@ -8,9 +8,7 @@ const FilterByActivity = ()=>{
 
     const dispatch =useDispatch();
     let allActivities = useSelector((state)=>state.activities)
-    let [filterByActivity,setFilterByActivity] = useState({
-        filterActivity:'',
-    })
+    let [filterByActivity,setFilterByActivity] = useState({filterActivity:''})
     
     useEffect(()=>{
         dispatch(filterActivity(filterByActivity.filterActivity))
@@ -19,8 +17,8 @@ const FilterByActivity = ()=>{
     const activities = Array.from(
         new Set (allActivities?.map((act)=>act.name)))
         .sort();
+
     const handleChange = (event)=>{
-        
         setFilterByActivity((state)=>{
             return {
                 ...state,
@@ -28,6 +26,7 @@ const FilterByActivity = ()=>{
             }
         })
     }
+    
     return(
         <>
             <label>Filter by Activity

@@ -7,10 +7,15 @@ import {
     ORDER_POPULATION,PAGE_NEXT,
     PAGE_BACK,
     CLEAR_DETAILS,
-   
 } from "../actions/countries";
-import {GET_ACTIVITIES,FILTER_ACTIVITY,DELETE_ACTIVITY ,UPDATE_ACTIVITY,
-    ERRORA,} from '../actions/activities'
+import {
+    GET_ACTIVITIES,
+    FILTER_ACTIVITY,
+    DELETE_ACTIVITY ,
+    UPDATE_ACTIVITY,
+    DELETE_ACTIVITY_OF_COUNTRY,
+    ERRORA
+} from '../actions/activities'
 
 const initialState ={
     allCountries: [],
@@ -74,6 +79,16 @@ const rootReducer = (state = initialState, action)=>{
             return{
                 ...state,
                 activities:[...state.activities,action.payload]
+            }
+        case DELETE_ACTIVITY_OF_COUNTRY:
+            const arrayAct = state.countryDetails.activities.filter(a=>a.id!==action.payload)
+            // const newAct={
+            //     ...state
+            //     ...state.activities=arrayAct
+            // } 
+            return{
+                ...state,
+                ...state.countryDetails.activities=arrayAct
             }
         case ERRORA:
             return{

@@ -14,13 +14,10 @@ const Filtros = ()=>{
     })
 
     const handleChange =(event)=>{
-       
-            setState({
-                search:event.target.value
-            });
-            dispatch(getCountryByName(event.target.value));
-  
-       
+        setState({
+            search:event.target.value
+        });
+        dispatch(getCountryByName(event.target.value));
     }
     
     return(
